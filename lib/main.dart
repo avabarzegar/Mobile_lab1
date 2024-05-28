@@ -10,8 +10,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Login Page',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Lab 2 Login Page'),
     );
   }
 }
@@ -55,24 +56,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _counter = 0;
-  var myFontSize=20.0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      myFontSize++;
-    });
-  }
+  final TextEditingController _passwordController = TextEditingController();
+  String imageSource = 'images/question-mark.png';
 
-  void _setNewValue(double newValue){
-    setState(() {
-      myFontSize= newValue;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -108,29 +99,28 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:', style: TextStyle(fontSize: myFontSize),
-            ),
-            Text(
-              '$_counter',
-              style: TextStyle(fontSize: myFontSize),
-            ),
-            Slider(
-              value: myFontSize,
-              min: 10.0,
-              max: 100.0,
-              divisions:90,
-              label: myFontSize.round.toString(),
-              onChanged: _setNewValue,
-            )
+            TextField(decoration: InputDecoration(labelText: 'Login Name'),),
+            TextField(controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),),
+            ElevatedButton(onPressed: ( ) {
+              String password = _passwordController.text;
+              setState(() {
+                if(password == 'QWERTY123'){
+                  imageSource = 'images/idea.png';
+                }else{
+                  imageSource = 'images/stop.png';
+                }
+              });
+            }, child: Text('Login'),),SizedBox(height: 20.0),Image.asset(imageSource,width: 300.0,height: 300.0,),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (){},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
