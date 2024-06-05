@@ -58,7 +58,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   final TextEditingController _passwordController = TextEditingController();
-  String imageSource = 'images/question-mark.png';
+  String imageSource = '';
 
 
   @override
@@ -71,31 +71,273 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: const Center(
+      // appBar: AppBar(
+      //   // TRY THIS: Try changing the color here to a specific color (to
+      //   // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+      //   // change color while the other colors stay the same.
+      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(widget.title),
+      // ),
+      body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child:  Column( crossAxisAlignment: CrossAxisAlignment.center,  children: [
-          Text("BROWSE CATEGORIES", style: TextStyle(fontSize: 30.0),),
-          Text("Not sure about exactly which recipe you're looking for? do a search, or dive into our most popular categories. ", style: TextStyle(fontSize: 20.0)),
-          Text("BY MEAT", style: TextStyle(fontSize: 25.0)),
-          Row(  children: [ Icon(Icons.star), Text("1 stick [8 TBSP] Unsalted butter") ] )
+        child:  SingleChildScrollView( child:
+        Column( mainAxisAlignment: MainAxisAlignment.center,   children: [
+          const Text("BROWSE CATEGORIES", style: TextStyle(fontSize: 30.0),),
+          const Text("Not sure about exactly which recipe you're looking for? do a search, or dive into our most popular categories. ", style: TextStyle(fontSize: 20.0)),
+          const Padding(
+              padding: EdgeInsets.all(40),
+              child: Text("BY MEAT", style: TextStyle(fontSize: 25.0),)
+
+            ),
+
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/beef.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "BEEF",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/chicken.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Chicken",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/crockpot.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Crockpot",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/main.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Main Dishes",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            )
+          ] ),
+          const Text("BY COURSE", style: TextStyle(fontSize: 25.0)),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/salad.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Salad Recipes",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/pork.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Pork",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/seafood.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Seafood",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/side.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "Side Dishes",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            )
+          ] ),
+          const Text("BY DESSERT", style: TextStyle(fontSize: 25.0)),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/beef.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "BEEF",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/beef.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "BEEF",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/beef.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "BEEF",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.asset(
+                      "images/beef.jpg",
+                      height: 160.0,
+                      width: 160.0,
+                      fit: BoxFit.fill),
+                ),
+                Text(
+                  "BEEF",
+                  style: TextStyle(fontSize: 30.0, backgroundColor: Colors.white),
+                  textAlign: TextAlign.center,
+
+                ),
+              ],
+            )
+          ] )
 
         ]),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
+    )
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){},
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

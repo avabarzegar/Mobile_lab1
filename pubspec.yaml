@@ -89,6 +89,11 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
-    - images/stop.png
-    - images/idea.png
-    - images/question-mark.png
+    - images/beef.jpg
+    - images/chicken.jpg
+    - images/crockpot.jpg
+    - images/main.jpg
+    - images/pork.jpg
+    - images/salad.jpg
+    - images/seafood.jpg
+    - images/side.jpg
