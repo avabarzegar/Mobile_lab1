@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
+import 'ProfilePage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Week 4',
+      title: 'Lab 5',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Login Page'),
+      home: const MyHomePage(title: 'Lab 5'),
     );
   }
 }
@@ -31,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   late TextEditingController _loginController;
   late TextEditingController _passwordController;
   String imageFolder = 'images/question-mark.png';
@@ -52,16 +53,26 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-
   void _checkPassword() {
     setState(() {
       if (_passwordController.text == 'QWERTY123') {
         imageFolder = 'images/idea.png';
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfilePage(loginName: _loginController.text),
+          ),
+        ).then((_) {
+          final snackBar = SnackBar(
+            content: Text('Welcome Back ${_loginController.text}'),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        });
+        _showSaveCredentialsDialog(); // Show save credentials dialog
       } else {
         imageFolder = 'images/stop.png';
       }
     });
-    _showSaveCredentialsDialog();
   }
 
   Future<void> _showSaveCredentialsDialog() async {
@@ -70,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Save Data'),
-          content: const Text('Would You Like to Save Your Login Data?'),
+          title: const Text('Save Credentials'),
+          content: const Text('Would you like to save your login credentials for next time?'),
           actions: <Widget>[
             TextButton(
               child: const Text('No'),
@@ -93,24 +104,21 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     if (save) {
-      _saveCredentialsIfAvailable();
+      await _saveCredentialsIfAvailable(); // Save credentials if user agrees
     } else {
-      _clearCredentials();
+      await _clearCredentials(); // Clear credentials if user disagrees
     }
   }
 
   Future<void> _saveCredentialsIfAvailable() async {
-    if (_storage != null) {
-      await _saveCredentials();
-    } else {
-      print("Storage is not initialized!");
-    }
+    await _saveCredentials();
   }
 
   Future<void> _saveCredentials() async {
     // Save credentials to EncryptedSharedPreferences
     await _storage.setString('username', _loginController.text);
     await _storage.setString('password', _passwordController.text);
+    print("Credentials saved");
   }
 
   Future<void> _clearCredentials() async {
@@ -120,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Reset text fields
     _loginController.clear();
     _passwordController.clear();
+    print("Credentials cleared");
   }
 
   Future<void> _loadCredentials() async {
@@ -130,13 +139,15 @@ class _MyHomePageState extends State<MyHomePage> {
       _loginController.text = username;
       _passwordController.text = password;
 
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         final snackBar = SnackBar(
           content: const Text('Previous login credentials are currently loaded.'),
           duration: const Duration(seconds: 30),
           action: SnackBarAction(
             label: 'Clear saved data',
             onPressed: () {
+              _loginController.clear(); // To clear the field once clicked on Clear
+              _passwordController.clear(); // To clear the field once clicked on Clear
               _clearCredentials();
             },
           ),
@@ -144,6 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
+    } else {
+      print("No credentials found");
     }
   }
 
